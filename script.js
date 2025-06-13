@@ -50,13 +50,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
-        // Validate all fields
-        const usernameError = validateUsername(username);
-        const emailError = validateEmail(email);
-        const passwordError = validatePassword(password);
+        // Initialize messages array
+        const messages = [];
 
-        // Collect all error messages
-        const messages = [usernameError, emailError, passwordError].filter(msg => msg !== '');
+        // Validate all fields and push error messages
+        const usernameError = validateUsername(username);
+        if (usernameError) {
+            messages.push(usernameError);
+        }
+
+        const emailError = validateEmail(email);
+        if (emailError) {
+            messages.push(emailError);
+        }
+
+        const passwordError = validatePassword(password);
+        if (passwordError) {
+            messages.push(passwordError);
+        }
 
         // Check if form is valid
         const isValid = messages.length === 0;
